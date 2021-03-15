@@ -1,0 +1,3 @@
+Victor;18
+Aristóteles;62
+Mortimer;99
