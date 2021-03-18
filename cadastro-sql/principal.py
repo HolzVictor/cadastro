@@ -1,5 +1,6 @@
 from utilitarios import *
 from leitores import *
+from conector import *
 from time import sleep
 
 while True:
@@ -11,9 +12,9 @@ while True:
         print(f'Opção inválida.')
     else:
         if comando == 1:
-            print('opção 1')
+            lerCadastro()
         elif comando == 2:
-            print('opção 2')
+            cadastrar()
         elif comando == 3:
             print('opção 3')
         elif comando == 4:

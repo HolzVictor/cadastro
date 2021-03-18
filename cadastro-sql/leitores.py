@@ -17,7 +17,8 @@ def leiaNome(mensagem=''):
     regex = re.compile(r'[a-zA-Z ]{1,30}')
     nome = regex.search(resposta)
     if nome is None or nome.group() != resposta:
-        raise AttributeError('Nome inválido.')
+        print('Nome inválido.', end=' ')
+        raise AttributeError
     else:
         return resposta
 
@@ -27,9 +28,10 @@ def leiaSexo(mensagem=''):
     regex = re.compile(r'M|F')
     sexo = regex.search(resposta)
     if sexo is None or sexo.group() != resposta:
-        raise AttributeError('Sexo inválido.')
+        print('Sexo inválido.', end=' ')
+        raise AttributeError
     else:
-        return sexo
+        return sexo.group(0)
 
 
 def leiaNascimento(mensagem=''):
@@ -37,9 +39,10 @@ def leiaNascimento(mensagem=''):
     regex = re.compile(r'([0-3][1-9])/([0-1][0-9])/([1-2][9|0][0-9][0-9])')
     nascimento = regex.search(resposta)
     if nascimento is None:
-        raise AttributeError('Data inválida')
+        print('Data inválida.', end=' ')
+        raise AttributeError
     else:
-        return f'{nascimento.group(3)}/{nascimento.group(2)}/{nascimento.group(1)}'
+        return f'{nascimento.group(3)}-{nascimento.group(2)}-{nascimento.group(1)}'
 
 
 def leiaTelefone(mensagem=''):
@@ -52,3 +55,25 @@ def leiaTelefone(mensagem=''):
 (-|\s)?
 \d{4}
     ''', re.VERBOSE)
+    telefone = regex.search(resposta)
+    if telefone is None or telefone.group() != resposta:
+        print('Telefone inválido.', end=' ')
+        raise AttributeError
+    else:
+        return telefone.group(0)
+
+
+def leiaEmail(mensagem=''):
+    resposta = input(mensagem)
+    regex = re.compile(r'''
+[a-zA-Z0-9._%+-]+    # nome de usuário
+@                    # símbolo @
+[a-zA-Z0-9.-]+       # nome de domínio
+[\.[a-zA-Z]{2,4}     # ponto alguma coisa  
+''', re.VERBOSE)
+    email = regex.search(resposta)
+    if email is None or email.group() != resposta:
+        print('Email inválido.', end=' ')
+        raise AttributeError
+    else:
+        return email.group(0)
