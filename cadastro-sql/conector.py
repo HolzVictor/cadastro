@@ -22,8 +22,13 @@ def cadastrar():
 
 
 def lerCadastro():
-    cursor.execute('select count(*) from pessoas;')
-    tamanho = len(cursor.fetchall())
-    for i in range(tamanho):
-        cursor.execute('select * from pessoas;')
-        print(cursor.fetchall())
+    cursor.execute('select * from pessoas;')
+    registros = cursor.fetchall()
+    for registro in registros:
+        linha()
+        print(f'Nome: {registro[1]}')
+        print(f'Sexo: {registro[2]}')
+        print(f'Nascimento: {registro[3]}')
+        print(f'Telefone: {registro[4]}')
+        print(f'Email: {registro[5]}')
+        linha()
