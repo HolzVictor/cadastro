@@ -18,7 +18,7 @@ while True:
         elif comando == 3:
             print('opção 3')
         elif comando == 4:
-            print('opção 4')
+            deletar()
         elif comando == 5:
             titulo('Saindo do sistema... Até logo!')
             sleep(2)

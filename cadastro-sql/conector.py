@@ -25,10 +25,19 @@ def lerCadastro():
     cursor.execute('select * from pessoas;')
     registros = cursor.fetchall()
     for registro in registros:
-        linha()
+        titulo('PESSOAS CADASTRADAS')
         print(f'Nome: {registro[1]}')
         print(f'Sexo: {registro[2]}')
         print(f'Nascimento: {registro[3]}')
         print(f'Telefone: {registro[4]}')
         print(f'Email: {registro[5]}')
         linha()
+
+
+def deletar():
+    titulo('DELETAR CADASTROS')
+    cursor.execute('select * from pessoas;')
+    registros = cursor.fetchall()
+    for registro in registros:
+        print('ID    Nome')
+        print(f'[{registro[0]}]   {registro[1]}')
