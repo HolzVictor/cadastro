@@ -16,7 +16,7 @@ while True:
         elif comando == 2:
             cadastrar()
         elif comando == 3:
-            print('opção 3')
+            alterar()
         elif comando == 4:
             deletar()
         elif comando == 5:

@@ -22,16 +22,25 @@ def cadastrar():
 
 
 def lerCadastro():
-    cursor.execute('select * from pessoas;')
-    registros = cursor.fetchall()
-    for registro in registros:
-        titulo('PESSOAS CADASTRADAS')
-        print(f'Nome: {registro[1]}')
-        print(f'Sexo: {registro[2]}')
-        print(f'Nascimento: {registro[3]}')
-        print(f'Telefone: {registro[4]}')
-        print(f'Email: {registro[5]}')
-        linha()
+    try:
+        cursor.execute('select * from pessoas;')
+    except:
+        print('[ERRO] Falha ao ler cadastros.')
+    else:
+        registros = cursor.fetchall()
+        for registro in registros:
+            titulo('PESSOAS CADASTRADAS')
+            print(f'Nome: {registro[1]}')
+            print(f'Sexo: {registro[2]}')
+            print(f'Nascimento: {registro[3]}')
+            print(f'Telefone: {registro[4]}')
+            print(f'Email: {registro[5]}')
+            linha()
+
+
+def alterar():
+    pass
+
 
 
 def deletar():
@@ -41,3 +50,14 @@ def deletar():
     for registro in registros:
         print('ID    Nome')
         print(f'[{registro[0]}]   {registro[1]}')
+    try:
+        id = leiaInt('ID do cadastro: ')
+    except:
+        print('[ERRO] Insira um ID válido.')
+    else:
+        try:
+            cursor.execute(f"delete from pessoas where id='{id}'")
+        except:
+            print('[ERRO] Falha ao deletar cadastro.')
+        else:
+            print('Cadastro deletado com sucesso!')
