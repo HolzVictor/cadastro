@@ -1,5 +1,8 @@
 import mysql.connector
 from leitores import *
+import utilitarios
+from time import sleep
+
 
 con = mysql.connector.connect(host='localhost', database='registros', user='root', password='252319', autocommit=True)
 cursor = con.cursor()
@@ -28,36 +31,61 @@ def lerCadastro():
         print('[ERRO] Falha ao ler cadastros.')
     else:
         registros = cursor.fetchall()
-        for registro in registros:
-            titulo('PESSOAS CADASTRADAS')
-            print(f'Nome: {registro[1]}')
-            print(f'Sexo: {registro[2]}')
-            print(f'Nascimento: {registro[3]}')
-            print(f'Telefone: {registro[4]}')
-            print(f'Email: {registro[5]}')
-            linha()
+        utilitarios.tabela(registros)
 
 
 def alterar():
-    pass
-
+    cursor.execute('select * from pessoas;')
+    registros = cursor.fetchall()
+    print('ID    Nome')
+    for registro in registros:
+        print(f'[{registro[0]}]   {registro[1]}')
+    try: 
+        id = leiaID('Selecione um cadastro[0 para sair]: ')
+    except:
+        print('[ERRO] Falha ao selecionar cadastro.')
+    else:
+        cursor.execute(f"select * from pessoas where id='{id}'")
+        cadastro = cursor.fetchall()
+        utilitarios.tabela(cadastro)
+        try:
+            coluna = leiaColuna('O que você quer alterar? ')
+        except:
+            print('[ERRO] Insira uma coluna válida.')
+        else:
+            utilitarios.alterarRegistro(coluna, id)
 
 
 def deletar():
-    titulo('DELETAR CADASTROS')
+    lista = []
+    utilitarios.titulo('DELETAR CADASTROS')
     cursor.execute('select * from pessoas;')
     registros = cursor.fetchall()
+    cursor.execute('select id from pessoas;')
+    cadastros = cursor.fetchall()
+    print('ID    Nome')
     for registro in registros:
-        print('ID    Nome')
         print(f'[{registro[0]}]   {registro[1]}')
-    try:
-        id = leiaInt('ID do cadastro: ')
-    except:
-        print('[ERRO] Insira um ID válido.')
-    else:
+    while True:
         try:
-            cursor.execute(f"delete from pessoas where id='{id}'")
+            id = leiaID('Selecione um cadastro[0 para sair]: ')
         except:
-            print('[ERRO] Falha ao deletar cadastro.')
+            print('[ERRO] Falha ao selecionar cadastro.')
         else:
-            print('Cadastro deletado com sucesso!')
+            for cadastro in cadastros:
+                for item in cadastro:
+                    lista.append(item)
+            if id == 0:
+                utilitarios.titulo('Retornando ao menu...')
+                sleep(2)
+                break
+            elif id in lista:
+                try:
+                    cursor.execute(f"delete from pessoas where id='{id}'")
+                except:
+                    print('[ERRO] Falha ao deletar cadastro.')
+                else:
+                    print('Cadastro deletado com sucesso.')
+                    break
+            else:
+                print('[ERRO] Cadastro inexistente.')

@@ -22,4 +22,6 @@ while True:
         elif comando == 5:
             titulo('Saindo do sistema... Até logo!')
             sleep(2)
+            cursor.close()
+            con.close()
             break

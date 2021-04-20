@@ -12,6 +12,27 @@ def leiaInt(mensagem=''):
         return int(resposta)
 
 
+def leiaID(mensagem=''):
+    resposta = input(mensagem)
+    regex = re.compile(r'[0-9]{1,3}')
+    num = regex.search(resposta)
+    if num is None or num.group() != resposta:
+        raise AttributeError('Opção inválida.')
+    else:
+        return int(resposta)
+
+
+def leiaColuna(mensagem=''):
+    resposta = input(mensagem)
+    regex = re.compile(r'(nome)|(sexo)|(nascimento)|(telefone)|(email)')
+    coluna = regex.search(resposta)
+    if coluna is None or coluna.group() != resposta:
+        print('Coluna inválida.', end=' ')
+        raise AttributeError
+    else:
+        return resposta
+
+
 def leiaNome(mensagem=''):
     resposta = input(mensagem)
     regex = re.compile(r'[a-zA-Z ]{1,30}')
