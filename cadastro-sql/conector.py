@@ -1,27 +1,12 @@
 import mysql.connector
-from utilitarios import *
-from leitores import *
+from leitores import leiaID, leiaNome, leiaSexo, leiaNascimento, leiaTelefone, leiaEmail, leiaColuna
+from utilitarios import tabela, coluna, titulo
 from time import sleep
+from os import system
 
 
-con = mysql.connector.connect(host='localhost', database='registros', user='root', password='252319', autocommit=True)
+con = mysql.connector.connect(host='localhost', database='registros', user='root', password='', autocommit=True)
 cursor = con.cursor()
-
-
-def cadastrar():
-    try:
-        nome = leiaNome('Nome: ')
-        sexo = leiaSexo('Sexo[M/F]: ')
-        nascimento = leiaNascimento('Nascimento[DD/MM/AAAA]: ')
-        telefone = leiaTelefone('Telefone: ')
-        email = leiaEmail('Email: ')
-    except:
-        print('Retornando ao menu...')
-    else:
-        cursor.execute(f'''
-        insert into pessoas values
-        (default, '{nome}', '{sexo}', '{nascimento}', '{telefone}', '{email}');
- ''')
 
 
 def lerCadastro():
@@ -32,6 +17,65 @@ def lerCadastro():
     else:
         registros = cursor.fetchall()
         tabela(registros)
+
+
+def cadastrar():
+    system('cls')
+    titulo('SISTEMA DE CADASTRO')
+    try:
+        nome = leiaNome('Nome: ')
+        sexo = leiaSexo('Sexo[M/F]: ')
+        nascimento = leiaNascimento('Nascimento[DD/MM/AAAA]: ')
+        telefone = leiaTelefone('Telefone: ')
+        email = leiaEmail('Email: ')
+    except:
+        system('cls')
+        sleep(1)
+        titulo('Retornando ao menu...')
+        sleep(2)
+    else:
+        cursor.execute(f'''
+        insert into pessoas values
+        (default, '{nome}', '{sexo}', '{nascimento}', '{telefone}', '{email}');
+ ''')
+
+
+def alterarRegistro(coluna, id):
+    if coluna == 'nome':
+        try:
+            nome = leiaNome('Novo nome: ')
+        except:
+            print('')
+        else:
+            cursor.execute(f"update pessoas set nome = '{nome}' where id = '{id}'")
+    elif coluna == 'sexo':
+        try:
+            sexo = leiaSexo('Novo sexo: ')
+        except:
+            print('')
+        else:
+            cursor.execute(f"update pessoas set sexo = '{sexo}' where id = '{id}'")
+    elif coluna == 'nascimento':
+        try:
+            nascimento = leiaNascimento('Novo nascimento: ')
+        except:
+            print('')
+        else:
+            cursor.execute(f"update pessoas set nascimento = '{nascimento}' where id = '{id}'")
+    elif coluna == 'telefone':
+        try:
+            telefone = leiaTelefone('Novo telefone: ')
+        except:
+            print('')
+        else:
+            cursor.execute(f"update pessoas set telefone = '{telefone}' where id = '{id}'")
+    elif coluna == 'email':
+        try:
+            email = leiaEmail('Novo email: ')
+        except:
+            print('')
+        else:
+            cursor.execute(f"update pessoas set email = '{email}' where id = '{id}'")
 
 
 def alterar():
