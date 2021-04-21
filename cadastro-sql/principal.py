@@ -1,7 +1,5 @@
 from utilitarios import *
-from leitores import *
 from conector import *
-from time import sleep
 
 while True:
     menu(['Ver cadastro', 'Cadastrar pessoa', 'Atualizar cadastro', 'Deletar cadastro', 'Sair do sistema'])

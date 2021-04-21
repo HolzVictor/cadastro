@@ -41,34 +41,34 @@ def alterarRegistro(coluna, id):
         try:
             nome = leiaNome('Novo nome: ')
         except:
-            print('[ERRO] Nome inválido.')
+            print('')
         else:
             cursor.execute(f"update pessoas set nome = '{nome}' where id = '{id}'")
     elif coluna == 'sexo':
         try:
             sexo = leiaSexo('Novo sexo: ')
         except:
-            print('[ERRO] Sexo inválido.')
+            print('')
         else:
             cursor.execute(f"update pessoas set sexo = '{sexo}' where id = '{id}'")
     elif coluna == 'nascimento':
         try:
             nascimento = leiaNascimento('Novo nascimento: ')
         except:
-            print('[ERRO] Nascimento inválido.')
+            print('')
         else:
-            cursor.execute(f"update pessoas set nascimento = '{nascimento} where id = '{id}'")
+            cursor.execute(f"update pessoas set nascimento = '{nascimento}' where id = '{id}'")
     elif coluna == 'telefone':
         try:
             telefone = leiaTelefone('Novo telefone: ')
         except:
-            print('[ERRO] Telefone inválido.')
+            print('')
         else:
             cursor.execute(f"update pessoas set telefone = '{telefone}' where id = '{id}'")
     elif coluna == 'email':
         try:
             email = leiaEmail('Novo email: ')
         except:
-            print('[ERRO] Email inválido.')
+            print('')
         else:
             cursor.execute(f"update pessoas set email = '{email}' where id = '{id}'")

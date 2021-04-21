@@ -1,5 +1,4 @@
 import re
-from utilitarios import *
 
 
 def leiaInt(mensagem=''):

@@ -1,6 +1,6 @@
 import mysql.connector
+from utilitarios import *
 from leitores import *
-import utilitarios
 from time import sleep
 
 
@@ -31,7 +31,7 @@ def lerCadastro():
         print('[ERRO] Falha ao ler cadastros.')
     else:
         registros = cursor.fetchall()
-        utilitarios.tabela(registros)
+        tabela(registros)
 
 
 def alterar():
@@ -47,18 +47,18 @@ def alterar():
     else:
         cursor.execute(f"select * from pessoas where id='{id}'")
         cadastro = cursor.fetchall()
-        utilitarios.tabela(cadastro)
+        tabela(cadastro)
         try:
             coluna = leiaColuna('O que você quer alterar? ')
         except:
             print('[ERRO] Insira uma coluna válida.')
         else:
-            utilitarios.alterarRegistro(coluna, id)
+            alterarRegistro(coluna, id)
 
 
 def deletar():
     lista = []
-    utilitarios.titulo('DELETAR CADASTROS')
+    titulo('DELETAR CADASTROS')
     cursor.execute('select * from pessoas;')
     registros = cursor.fetchall()
     cursor.execute('select id from pessoas;')
@@ -76,7 +76,7 @@ def deletar():
                 for item in cadastro:
                     lista.append(item)
             if id == 0:
-                utilitarios.titulo('Retornando ao menu...')
+                titulo('Retornando ao menu...')
                 sleep(2)
                 break
             elif id in lista:
