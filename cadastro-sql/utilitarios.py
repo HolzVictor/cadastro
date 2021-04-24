@@ -8,6 +8,7 @@ def titulo(mensagem):
     linha()
 
 
+# Função que imprime um menu interativo na tela
 def menu(lista):
     titulo('MENU PRINCIPAL')
     c = 1
