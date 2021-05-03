@@ -1,6 +1,0 @@
-__pycache__
-.idea/
-cadastro-sql/Pipfile
-cadastro-sql/Pipfile.lock
-cadastro-sql/__pycache__/conector.cpython-38.pyc
-cadastro-sql/__pycache__/utilitarios.cpython-38.pyc
