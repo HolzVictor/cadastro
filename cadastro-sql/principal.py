@@ -1,5 +1,7 @@
-from utilitarios import *
 from conector import *
+from utilitarios import menu, titulo
+from leitores import leiaInt
+from os import system
 
 while True:
     menu(['Ver cadastro', 'Cadastrar pessoa', 'Atualizar cadastro', 'Deletar cadastro', 'Sair do sistema'])
