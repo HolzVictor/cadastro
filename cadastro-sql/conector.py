@@ -3,11 +3,30 @@ from utilitarios import *
 from leitores import *
 from time import sleep
 
-
-con = mysql.connector.connect(host='localhost', database='registros', user='root', password='252319', autocommit=True)
+# Cria um objeto de conexão
+con = mysql.connector.connect(host='localhost',
+                              database='registros',
+                              user='root',
+                              password='252319',
+                              autocommit=True)
+# Cria um objeto de cursor
 cursor = con.cursor()
 
+# Cria a tabela de cadastro
+cursor.execute('''
+create table pessoas (
+id int auto_increment not null,
+nome varchar(30) not null,
+sexo enum('M', 'F'),
+nascimento date,
+telefone varchar(20),
+email varchar(30),
+primary key (id)
+) default charset = utf8;
+''')
 
+
+# Cadastra os registros no banco de dados
 def cadastrar():
     try:
         nome = leiaNome('Nome: ')
@@ -24,6 +43,7 @@ def cadastrar():
  ''')
 
 
+# Lê os registros do banco de dados e mostra-os formatos na tela
 def lerCadastro():
     try:
         cursor.execute('select * from pessoas;')
